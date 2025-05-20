@@ -1,5 +1,6 @@
 package com.claims.controller;
 
+import com.claims.dto.LoginRequest;
 import com.claims.dto.RegisterRequest;
 import com.claims.model.User;
 import com.claims.service.UserService;
@@ -23,5 +24,11 @@ public class AuthController {
     public String test() {
         return "Auth controller is active!";
     }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String token = userService.login(request.getEmail(), request.getPassword());
+        return ResponseEntity.ok(token);
+    }
+
 }
 
